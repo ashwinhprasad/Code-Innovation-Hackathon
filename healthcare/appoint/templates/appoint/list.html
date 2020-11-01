@@ -1,0 +1,29 @@
+{% extends "./base.html" %}
+  {% block bodyblock %}
+    {% if types %}
+      <form method="post">
+        <h2>Search for a Particular Type of Doctor</h2>
+        {% csrf_token %}
+        <select name="type">
+          {% for type in types %}
+          <option value="{{ type.id }}">{{ type.type }}</option>
+          {% endfor %}
+          <input type="submit" value="Search">
+        </select>
+      </form>
+    {% else %}
+      <h1>No types available</h1>
+    {% endif %}
+    {% if doctor %}
+      {% for doc in doctor.all %}
+
+        <p>{{ doc.name }}</p>
+        <p>{{ doc.email }}</p>
+        <p>{{ doc.doctor.hospital }}</p>
+        <a href="/appointment/detail/{{ doc.id }}">Visit profile</a>
+
+      {% endfor %}
+    {% else %}
+      <h2>No Doctors Available</h2>
+    {% endif %}
+  {% endblock %}
