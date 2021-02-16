@@ -33,3 +33,9 @@ def QuestionDetailView(request,id):
     except:
         context['error'] = "Question Not Found"
     return render(request,"forum/detail.html",context)
+
+
+
+# home page
+def indexView(request):
+    return render(request,"index.html",{})
